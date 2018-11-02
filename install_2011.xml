@@ -92,7 +92,7 @@
 		</fieldset>';
 
 		// Do we have some labels setup? If so offer to search by them!
-		elseif ($context['currently_using_labels'])
+		if ($context['currently_using_labels'])
 		{
 			echo '
 		<fieldset class="labels">
