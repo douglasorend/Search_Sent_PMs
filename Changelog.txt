@@ -1,3 +1,9 @@
+v2.7 - April 21st, 2018
+o Fixed an issue where right click, open in new tab on the message doesn't open the PM properly.
+
+v2.6 - December 8th, 2017
+o Added new installer to deal with SMF 2.0.15 and up.
+
 v2.5 - November 19th, 2017
 o SMF 2.0.x: Fixed installation error for [b]PersonalMessage.template.php[/b].
 o Added Spanish Latin translation, courtsey of [url=https://www.simplemachines.org/community/index.php?action=profile;u=322597]Rock Lee[/url]!
