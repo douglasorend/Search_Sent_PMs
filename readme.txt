@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]SEARCH SENT PERSONAL MESSAGES v2.0[/b][/size][/color]
+[center][color=red][size=16pt][b]SEARCH SENT PERSONAL MESSAGES v2.1[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3888]Link to Mod[/url]
 [/center]
 [hr]
@@ -7,7 +7,7 @@
 [color=blue][b][size=12pt][u]Introduction[/u][/size][/b][/color]
 This mod allows the users of the Personal Messaging (PM) system to search sent PMs in addition to the core Inbox PMs.  With the [url=http://custom.simplemachines.org/mods/index.php?mod=3888]Search Sent Personal Messages (PMs)[/url] mod installed, you also get the ability to choose between read and unread outgoing PMs.
 
-[b]Version 2.0[/b] introduces the concept of taking action on searched-for PMs.
+[b]Version 2.0[/b] introduces the concept of taking action on searched-for PMs.  (Not available on the Core theme!)
 
 [color=blue][b][size=12pt][u]Admin Settings[/u][/size][/b][/color]
 There are no admin settings.  To disable it, you must remove this mod.

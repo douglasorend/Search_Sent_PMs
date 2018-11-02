@@ -2,13 +2,14 @@
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:SearchSentPMs</id>
-<version>2.0</version>
+<version>2.1</version>
 
 <file name="$sourcedir/PersonalMessage.php">
 	<!-- MessageFolder function -->
 	<operation>	<!-- line 490 -->
-		<search position="replace"><![CDATA[$pmbox = $context['folder'] != 'sent' ? $txt['inbox'] : $txt['sent_items'];]]></search>
-		<add><![CDATA[$context['folder_pmbox'] = $pmbox = ($context['folder'] != 'sent' ? ($context['folder'] != 'unread' ? $txt['inbox'] : $txt['unread_items']) : $txt['sent_items']);]]></add>
+		<search position="after"><![CDATA[$txt['delete_all'] = str_replace('PMBOX', $pmbox, $txt['delete_all']);]]></search>
+		<add><![CDATA[$context['folder_pmbox'] = $pmbox = $context['folder'] != 'unread' ? $pmbox : $txt['unread_items'];
+	]]></add>
 	</operation>
 	<operation>	<!-- line 505 -->
 		<search position="before"><![CDATA['name' => $txt['pm_current_label'] . ': ' . $context['current_label']]]></search>
@@ -114,9 +115,9 @@ function template_folder()
 	<table class="table_grid">
 	<thead>
 		<tr class="title_bar">
-			<th class="lefttext" width="30%">', $txt['date'], '</th>
-			<th class="lefttext" width="50%">', $txt['subject'], '</th>
-			<th class="lefttext" width="20%">', $txt['from'], '</th>
+			<th class="lefttext quarter_table">', $txt['date'], '</th>
+			<th class="lefttext half_table">', $txt['subject'], '</th>
+			<th class="lefttext quarter_table">', $txt['from'], '</th>
 		</tr>
 	</thead>
 	<tbody>';]]></search>
@@ -129,10 +130,9 @@ function template_folder()
 	<table class="table_grid">
 	<thead>
 		<tr class="title_bar">
-			<th class="lefttext" width="4%" />
-			<th class="lefttext" width="30%">', $txt['date'], '</th>
-			<th class="lefttext" width="50%">', $txt['subject'], '</th>
-			<th class="lefttext" width="20%">', ($context['folder'] == 'inbox' ? $txt['from'] : $txt['to']), '</th>
+			<th class="lefttext quarter_table">', $txt['date'], '</th>
+			<th class="lefttext half_table">', $txt['subject'], '</th>
+			<th class="lefttext quarter_table">', $context['folder'] == 'inbox' ? $txt['from'] : $txt['to'], '</th>
 			<th align="center" width="4%" class="last_th"><input type="checkbox" onclick="invertAll(this, this.form);" class="input_check" /></th>
 		</tr>
 	</thead>
@@ -326,7 +326,7 @@ function template_folder_actions()
 					</h3>
 				</div>
 				<div id="advanced_panel_div">
-					<ul id="searchLabelsExpand" class="reset">';
+					<ul id="searchLabelsExpand">';
 
 		foreach ($context['search_labels'] as $label)
 			echo '

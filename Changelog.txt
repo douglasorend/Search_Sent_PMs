@@ -1,3 +1,9 @@
+v2.1 - August 4th, 2017
+o Removed support for SMF 2.1 Beta 1 & 2.
+o Added support for SMF 2.1 Beta 3.
+o Added almost-complete support for SMF 2.0's Core theme.
+o Compatibilty changes for [url=https://custom.simplemachines.org/mods/index.php?mod=4141]Separate Unread PMs[/url].
+
 v2.0 - March 13th, 2017
 o Rebuilt mod to work with [url=http://custom.simplemachines.org/mods/index.php?mod=4141]Separate Unread PMs[/url] mod.
 
