@@ -2,7 +2,7 @@
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:SearchSentPMs</id>
-<version>1.4</version>
+<version>1.5</version>
 
 <!-------------------------------------------------------------------------->
 <!-- Search PMs from Sent Items (PersonalMessage.php)                     -->
@@ -92,7 +92,7 @@
 		</fieldset>';
 
 		// Do we have some labels setup? If so offer to search by them!
-		if ($context['currently_using_labels'])
+		elseif ($context['currently_using_labels'])
 		{
 			echo '
 		<fieldset class="labels">
