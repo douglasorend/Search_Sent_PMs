@@ -6,7 +6,7 @@
 	<type>modification</type>
 	<version>2.5</version>
 
-	<install for="2.0 - 2.0.99">
+	<install for="2.0 - 2.0.14">
 		<readme type="file" parsebbc="true">readme.txt</readme>
 		<modification type="file">install_20x.xml</modification>
 		<modification type="file">language_english.xml</modification>
@@ -16,7 +16,7 @@
 		<modification type="file">language_spanish_latin.xml</modification>
 		<modification type="file">language_spanish_latin-utf8.xml</modification>
 	</install>
-	<uninstall for="2.0 - 2.0.99">
+	<uninstall for="2.0 - 2.0.14">
 		<modification type="file" reverse="true">install_20x.xml</modification>
 		<modification type="file" reverse="true">language_english.xml</modification>
 		<modification type="file" reverse="true">language_english-utf8.xml</modification>
@@ -25,6 +25,26 @@
 		<modification type="file" reverse="true">language_spanish_latin.xml</modification>
 		<modification type="file" reverse="true">language_spanish_latin-utf8.xml</modification>
 	</uninstall>
+	<install for="2.0.15 - 2.0.99">
+		<readme type="file" parsebbc="true">readme.txt</readme>
+		<modification type="file">install_2015.xml</modification>
+		<modification type="file">language_english.xml</modification>
+		<modification type="file">language_english-utf8.xml</modification>
+		<modification type="file">language_portuguese_pt.xml</modification>
+		<modification type="file">language_portuguese_pt.xml</modification>
+		<modification type="file">language_spanish_latin.xml</modification>
+		<modification type="file">language_spanish_latin-utf8.xml</modification>
+	</install>
+	<uninstall for="2.0.15 - 2.0.99">
+		<modification type="file" reverse="true">install_2015.xml</modification>
+		<modification type="file" reverse="true">language_english.xml</modification>
+		<modification type="file" reverse="true">language_english-utf8.xml</modification>
+		<modification type="file" reverse="true">language_portuguese_pt.xml</modification>
+		<modification type="file" reverse="true">language_portuguese_pt.xml</modification>
+		<modification type="file" reverse="true">language_spanish_latin.xml</modification>
+		<modification type="file" reverse="true">language_spanish_latin-utf8.xml</modification>
+	</uninstall>
+
 
 	<install for="2.1 Beta 3">
 		<readme type="file" parsebbc="true">readme.txt</readme>
