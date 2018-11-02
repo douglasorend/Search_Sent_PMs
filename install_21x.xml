@@ -2,7 +2,7 @@
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:SearchSentPMs</id>
-<version>2.3</version>
+<version>2.4</version>
 
 <file name="$sourcedir/PersonalMessage.php">
 	<!-- MessageFolder function -->
@@ -54,7 +54,12 @@
 	</operation>
 	<operation>	<!-- line 1553 -->
 		<search position="replace"><![CDATA[$href = $scripturl . '?action=pm;f=' . $context['folder'] . (isset($context['first_label'][$row['id_pm']]) ? ';l=' . $context['first_label'][$row['id_pm']] : '') . ';pmid=' . ($context['display_mode'] == 2 && isset($real_pm_ids[$head_pms[$row['id_pm']]]) ? $real_pm_ids[$head_pms[$row['id_pm']]] : $row['id_pm']) . '#msg' . $row['id_pm'];]]></search>
-		<add><![CDATA[$href = $scripturl . '?action=pm;f=' . ($context['folder'] != 'unread' && empty($context['message_read'][$row['id_pm']]) ? 'unread' : $context['folder']) . ';kstart;start=0;sort=date;pmid=' . ($context['display_mode'] == 2 && isset($real_pm_ids[$head_pms[$row['id_pm']]]) ? $real_pm_ids[$head_pms[$row['id_pm']]] : $row['id_pm']) . '#msg' . $row['id_pm'];]]></add>
+		<add><![CDATA[$href = $scripturl . '?action=pm;f=' . ($context['folder'] != 'unread' && empty($context['message_read'][$row['id_pm']]) ? $context['folder'] : 'unread') . ';kstart;start=0;sort=date;pmid=' . ($context['display_mode'] == 2 && isset($real_pm_ids[$head_pms[$row['id_pm']]]) ? $real_pm_ids[$head_pms[$row['id_pm']]] : $row['id_pm']) . '#msg' . $row['id_pm'];]]></add>
+	</operation>
+	<operation>	<!-- line 1560 -->
+		<search position="before"><![CDATA['counter' => ++$counter,]]></search>
+		<add><![CDATA[
+				'is_selected' => '',]]></add>
 	</operation>
 </file>
 
@@ -160,7 +165,7 @@ function template_folder()
 			echo '
 						};
 					// ]]]]><![CDATA[></script>
-					', $message['icon'], '</td>
+					', $message['is_replied_to'] ? '<img src="' . $settings['images_url'] . '/icons/pm_replied.gif" style="margin-right: 4px;" alt="' . $txt['pm_replied'] . '" />' : '<img src="' . $settings['images_url'] . '/icons/pm_read.gif" style="margin-right: 4px;" alt="' . $txt['pm_read'] . '" />', '</td>
 				<td>', $message['time'], '</td>
 				<td>', $message['link'], '</td>
 				<td>', ($context['folder'] == 'inbox' ? $message['member']['link'] : implode(', ', $message['recipients']['to'])), '</td>

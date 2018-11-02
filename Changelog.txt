@@ -1,3 +1,6 @@
+v2.4 - November 13th, 2017
+o Made code corrections suggested by [url=https://www.simplemachines.org/community/index.php?action=profile;u=112942]GL700Wing[/url] several posts back...
+
 v2.3 - October 9th, 2017
 o Added missing string, as noted by [url=https://www.simplemachines.org/community/index.php?action=profile;u=112942]GL700Wing[/url] in [url=https://www.simplemachines.org/community/index.php?topic=524832.msg3943690#msg3943690]this post[/url].
 
