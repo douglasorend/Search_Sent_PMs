@@ -1,3 +1,6 @@
+v2.0 - March 13th, 2017
+o Rebuilt mod to work with [url=http://custom.simplemachines.org/mods/index.php?mod=4141]Separate Unread PMs[/url] mod.
+
 v1.7 - September 25th, 2015
 o Added support for SMF 2.0.11
 
