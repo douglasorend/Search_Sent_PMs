@@ -5,14 +5,14 @@
 <version>2.5</version>
 
 <!-------------------------------------------------------------------------->
-<!-- Language file edits (English - Modifications & PersonalMessage)      -->
+<!-- Language file edits (Spanish Latin - Modifications & PersonalMessage)      -->
 <!-------------------------------------------------------------------------->
-<file name="$languagedir/PersonalMessage.english.php">
+<file name="$languagedir/PersonalMessage.spanish_latin.php" error="skip">
 	<operation>
 		<search position="end" />
-		<add><![CDATA[$txt['pm_search_what'] = 'Search group';
-$txt['pm_search_to_user'] = 'To user';
-$txt['sent'] = 'Sent Items';
+		<add><![CDATA[$txt['pm_search_what'] = 'Grupo de b&uacute;squeda';
+$txt['pm_search_to_user'] = 'Buscar usuario';
+$txt['sent'] = 'Elementos enviados';
 ]]></add>
 	</operation>
 </file>

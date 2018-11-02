@@ -1,3 +1,7 @@
+v2.5 - November 19th, 2017
+o SMF 2.0.x: Fixed installation error for [b]PersonalMessage.template.php[/b].
+o Added Spanish Latin translation, courtsey of [url=https://www.simplemachines.org/community/index.php?action=profile;u=322597]Rock Lee[/url]!
+
 v2.4 - November 13th, 2017
 o Made code corrections suggested by [url=https://www.simplemachines.org/community/index.php?action=profile;u=112942]GL700Wing[/url] several posts back...
 
