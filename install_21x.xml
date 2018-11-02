@@ -2,7 +2,7 @@
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:SearchSentPMs</id>
-<version>1.4</version>
+<version>1.6</version>
 
 <!-------------------------------------------------------------------------->
 <!-- Search PMs from Sent Items (PersonalMessage.php)                     -->
@@ -49,8 +49,8 @@
 <!-------------------------------------------------------------------------->
 <file name="$themedir/PersonalMessage.template.php">
 	<operation>
-		<search position="replace"><![CDATA[<th class="lefttext last_th" width="20%">', $txt['from'], '</th>]]></search>
-		<add><![CDATA[<th class="lefttext last_th" width="20%">', ($context['folder'] == 'inbox' ? $txt['from'] : $txt['to']), '</th>]]></add>
+		<search position="replace"><![CDATA[<th class="lefttext" width="20%">', $txt['from'], '</th>]]></search>
+		<add><![CDATA[<th class="lefttext" width="20%">', ($context['folder'] == 'inbox' ? $txt['from'] : $txt['to']), '</th>]]></add>
 	</operation>
 	<operation>
 		<search position="replace"><![CDATA[<td>', $message['member']['link'], '</td>]]></search>
