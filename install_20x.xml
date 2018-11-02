@@ -2,7 +2,7 @@
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:SearchSentPMs</id>
-<version>2.1</version>
+<version>2.2</version>
 
 <file name="$sourcedir/PersonalMessage.php">
 	<!-- MessageFolder function -->
@@ -56,308 +56,6 @@
 		<search position="replace"><![CDATA[$href = $scripturl . '?action=pm;f=' . $context['folder'] . (isset($context['first_label'][$row['id_pm']]) ? ';l=' . $context['first_label'][$row['id_pm']] : '') . ';pmid=' . ($context['display_mode'] == 2 && isset($real_pm_ids[$head_pms[$row['id_pm']]]) ? $real_pm_ids[$head_pms[$row['id_pm']]] : $row['id_pm']) . '#msg' . $row['id_pm'];]]></search>
 		<add><![CDATA[$href = $scripturl . '?action=pm;f=' . ($context['folder'] != 'unread' && empty($context['message_read'][$row['id_pm']]) ? 'unread' : $context['folder']) . ';kstart;start=0;sort=date;pmid=' . ($context['display_mode'] == 2 && isset($real_pm_ids[$head_pms[$row['id_pm']]]) ? $real_pm_ids[$head_pms[$row['id_pm']]] : $row['id_pm']) . '#msg' . $row['id_pm'];]]></add>
 	</operation>
-</file>
-
-<!-------------------------------------------------------------------------->
-<!-- Search PMs from Sent Items (PersonalMessage.template.php)            -->
-<!-------------------------------------------------------------------------->
-<file name="$boarddir/Themes/core/PersonalMessage.template.php">
-	<!-- template_folder function -->
-	<operation>	<!-- line 51 -->
-		<search position="replace"><![CDATA[function template_folder()]]></search>
-		<add><![CDATA[function template_folder_javascript()]]></add>
-	</operation>
-	<operation>	<!-- line 131 -->
-		<search position="after"><![CDATA[
-	echo '
-<form action="', $scripturl, '?action=pm;sa=pmactions;', $context['display_mode'] == 2 ? 'conversation;' : '', 'f=', $context['folder'], ';start=', $context['start'], $context['current_label_id'] != -1 ? ';l=' . $context['current_label_id'] : '', '" method="post" accept-charset="', $context['character_set'], '" name="pmFolder">';]]></search>
-		<add><![CDATA[}
-
-function template_folder()
-{
-	global $context, $settings, $options, $scripturl, $modSettings, $txt;
-	
-	template_folder_javascript();
-]]></add>
-	</operation>
-
-	<!-- template_subject_list function -->
-	<operation>	<!-- line 608 -->
-		<search position="replace"><![CDATA[	{
-		if (!empty($context['currently_using_labels']) && $context['folder'] != 'sent')
-		{
-			echo '
-				<select name="pm_action" onchange="if (this.options[this.selectedIndex].value) this.form.submit();" onfocus="loadLabelChoices();">
-					<option value="">', $txt['pm_sel_label_title'], ':</option>
-					<option value="" disabled="disabled">---------------</option>';
-
-			echo '
-									<option value="" disabled="disabled">', $txt['pm_msg_label_apply'], ':</option>';
-			foreach ($context['labels'] as $label)
-				if ($label['id'] != $context['current_label_id'])
-					echo '
-					<option value="add_', $label['id'], '">&nbsp;', $label['name'], '</option>';
-			echo '
-					<option value="" disabled="disabled">', $txt['pm_msg_label_remove'], ':</option>';
-			foreach ($context['labels'] as $label)
-				echo '
-					<option value="rem_', $label['id'], '">&nbsp;', $label['name'], '</option>';
-			echo '
-				</select>
-				<noscript>
-					<input type="submit" value="', $txt['pm_apply'], '" class="button_submit" />
-				</noscript>';
-		}
-
-		echo '
-				<input type="submit" name="del_selected" value="', $txt['quickmod_delete_selected'], '" onclick="if (!confirm(\'', $txt['delete_selected_confirm'], '\')) return false;" class="button_submit" />';
-	}
-
-	echo '
-			</div>
-		</div>';
-}]]></search>
-		<add><![CDATA[		template_folder_actions();
-
-	echo '
-				</div>
-	</div>';
-}
-
-function template_folder_actions()
-{
-	global $context, $txt;
-
-	if (!empty($context['currently_using_labels']) && $context['folder'] != 'sent' && $context['folder'] != 'unread')
-	{
-		echo '
-				<select name="pm_action" onchange="if (this.options[this.selectedIndex].value) this.form.submit();" onfocus="loadLabelChoices();">
-					<option value="">', $txt['pm_sel_label_title'], ':</option>
-					<option value="" disabled="disabled">---------------</option>';
-
-		echo '
-									<option value="" disabled="disabled">', $txt['pm_msg_label_apply'], ':</option>';
-		foreach ($context['labels'] as $label)
-			if ($label['id'] != $context['current_label_id'])
-				echo '
-					<option value="add_', $label['id'], '">&nbsp;', $label['name'], '</option>';
-		echo '
-					<option value="" disabled="disabled">', $txt['pm_msg_label_remove'], ':</option>';
-		foreach ($context['labels'] as $label)
-			echo '
-					<option value="rem_', $label['id'], '">&nbsp;', $label['name'], '</option>';
-		echo '
-				</select>
-				<noscript>
-					<input type="submit" value="', $txt['pm_apply'], '" class="button_submit" />
-				</noscript>';
-	}
-
-	echo '
-				<input type="submit" name="del_selected" value="', $txt['quickmod_delete_selected'], '" onclick="if (!confirm(\'', $txt['delete_selected_confirm'], '\')) return false;" class="button_submit" />';
-}]]></add>
-	</operation>
-
-	<!-- template_search function -->
-	<operation>	<!-- line 655 -->
-		<search position="before"><![CDATA[document.getElementById("expandLabelsIcon").src = smf_images_url + (current ? "/expand.gif" : "/collapse.gif");]]></search>
-		<add><![CDATA[
-		}
-		function expandShowLabels(current)
-		{
-			document.getElementById("SearchUserField").innerHTML = current ? "' . $txt['pm_search_to_user'] . ':" : "' . $txt['pm_search_user'] . ':";
-			document.getElementById("InboxLabelsExpand").style.display = current ? "none" : "";]]></add>
-	</operation>		
-	<operation>	<!-- line 718 -->
-		<search position="replace"><![CDATA[<dt>', $txt['pm_search_user'], ':</dt>]]></search>
-		<add><![CDATA[<dt>', $txt['pm_search_what'], ':</dt>
-					<dd>
-						<select name="search_what">
-							<option value="1" onclick="expandShowLabels(0); return false;">', $txt['inbox'], '</option>
-							<option value="2" onclick="expandShowLabels(1); return false;">', $txt['sent_items'], '</option>', (isset($context['sup_folder']) ? '
-							<option value="3" onclick="expandShowLabels(1); return false;">' . $txt['unread_items'] . '</option>' : ''), '
-						</select>
-					</dd>
-					<dt id="SearchUserField">', $txt['pm_search_user'], ':</dt>]]></add>
-	</operation>
-	<operation>	<!-- line 750 -->
-		<search position="replace"><![CDATA[if ($context['currently_using_labels'])
-		{
-			echo '
-		<fieldset class="labels">
-			<span class="upperframe"><span></span></span>
-			<div class="roundframe">
-				<div class="title_bar">
-					<h4 class="titlebg">
-						<span class="ie6_header floatleft"><a href="javascript:void(0);" onclick="expandCollapseLabels(); return false;"><img src="', $settings['images_url'], '/expand.gif" id="expandLabelsIcon" alt="" /></a> <a href="javascript:void(0);" onclick="expandCollapseLabels(); return false;"><strong>', $txt['pm_search_choose_label'], '</strong></a></span>
-					</h4>
-				</div>
-				<ul id="searchLabelsExpand" class="reset" ', $context['check_all'] ? 'style="display: none;"' : '', '>';
-
-			foreach ($context['search_labels'] as $label)
-				echo '
-					<li>
-						<label for="searchlabel_', $label['id'], '"><input type="checkbox" id="searchlabel_', $label['id'], '" name="searchlabel[', $label['id'], ']" value="', $label['id'], '" ', $label['checked'] ? 'checked="checked"' : '', ' class="input_check" />
-						', $label['name'], '</label>
-					</li>';
-
-			echo '
-				</ul>
-				<p>
-					<input type="checkbox" name="all" id="check_all" value="" ', $context['check_all'] ? 'checked="checked"' : '', ' onclick="invertAll(this, this.form, \'searchlabel\');" class="input_check" /><em> <label for="check_all">', $txt['check_all'], '</label></em>
-				</p>
-			</div>
-			<span class="lowerframe"><span></span></span>
-		</fieldset>';
-		}
-
-		echo ']]></search>
-		<add><![CDATA[if ($context['currently_using_labels'])
-		{
-			echo '
-		<div id="InboxLabelsExpand"><fieldset class="labels">
-			<span class="upperframe"><span></span></span>
-			<div class="roundframe">
-				<div class="title_bar">
-					<h4 class="titlebg">
-						<span class="ie6_header floatleft"><a href="javascript:void(0);" onclick="expandCollapseLabels(); return false;"><img src="', $settings['images_url'], '/expand.gif" id="expandLabelsIcon" alt="" /></a> <a href="javascript:void(0);" onclick="expandCollapseLabels(); return false;"><strong>', $txt['pm_search_choose_label'], '</strong></a></span>
-					</h4>
-				</div>
-				<ul id="searchLabelsExpand" class="reset" ', $context['check_all'] ? 'style="display: none;"' : '', '>';
-
-			foreach ($context['search_labels'] as $label)
-				echo '
-					<li>
-						<label for="searchlabel_', $label['id'], '"><input type="checkbox" id="searchlabel_', $label['id'], '" name="searchlabel[', $label['id'], ']" value="', $label['id'], '" ', $label['checked'] ? 'checked="checked"' : '', ' class="input_check" />
-						', $label['name'], '</label>
-					</li>';
-
-			echo '
-				</ul>
-				<p>
-					<span class="floatleft"><input type="checkbox" name="all" id="check_all" value="" ', $context['check_all'] ? 'checked="checked"' : '', ' onclick="invertAll(this, this.form, \'searchlabel\');" class="input_check" /><em> <label for="check_all">', $txt['check_all'], '</label></em></span>
-				</p><br class="clear" />
-			</div>
-			<span class="lowerframe"><span></span></span>
-		</fieldset></div>';
-		}
-
-		echo ']]></add>
-	</operation>
-
-	<!-- template_search_results function -->
-	<operation>
-		<search position="replace"><![CDATA[<td colspan="3">', $txt['pm_search_results'], '</td>
-			</tr>
-			<tr class="catbg" height="30">
-				<td colspan="3"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></search>
-		<add><![CDATA[<td colspan="3">', $txt['pm_search_results'], ': ', $txt[($context['folder'] == 'unread' ? 'unread_items' : $context['folder'])], '</td>
-			</tr>
-			<tr class="catbg" height="30">
-				<td colspan="4"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></add>
-	</operation>
-	<operation>
-		<search position="replace"><![CDATA[<td colspan="3">', $txt['pm_search_results'], '</td>
-			</tr>
-			<tr class="catbg">
-				<td colspan="3"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></search>
-		<add><![CDATA[<tr class="titlebg">
-				<td colspan="4">', $txt['pm_search_results'], ': ', $txt[($context['folder'] == 'unread' ? 'unread_items' : $context['folder'])], '</td>
-			</tr>
-			<tr class="catbg">
-				<td colspan="4"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></add>
-	</operation>
-	<operation>	<!-- line 777 -->
-		<search position="before"><![CDATA[function template_search_results()
-{]]></search>
-		<add><![CDATA[
-	template_folder_javascript();]]></add>
-	</operation>
-	<operation>	<!-- line 789 -->
-		<search position="after"><![CDATA[// This splits broadly into two types of template... complete results first.]]></search>
-		<add><![CDATA[echo '
-		<form class="flow_hidden" action="', $scripturl, '?action=pm;sa=pmactions;', $context['display_mode'] == 2 ? 'conversation;' : '', 'f=', $context['folder'], ';start=', $context['start'], $context['current_label_id'] != -1 ? ';l=' . $context['current_label_id'] : '', '" method="post" accept-charset="', $context['character_set'], '" name="pmFolder">';
-
-	]]></add>
-	</operation>
-	<operation>
-		<search position="replace"><![CDATA[<td width="30%">', $txt['date'], '</td>
-				<td width="50%">', $txt['subject'], '</td>
-				<td width="20%">', $txt['from'], '</td>]]></search>
-		<add><![CDATA[
-				<th width="30%">', $txt['date'], '</th>
-				<th width="50%">', $txt['subject'], '</th>
-				<th width="20%">', ($context['folder'] == 'inbox' ? $txt['from'] : $txt['to']), '</th>
-				<th align="center" width="4%" class="last_th"><input type="checkbox" onclick="invertAll(this, this.form);" class="input_check" /></th>]]></add>
-	</operation>
-	<operation>	<!-- line 863 -->
-		<search position="replace"><![CDATA[<td>', $message['time'], '</td>
-				<td>', $message['link'], '</td>
-				<td>', $message['member']['link'], '</td>]]></search>
-		<add><![CDATA[<td align="center">
-					<script type="text/javascript"><!-- // --><![CDATA[<]]><![CDATA[![CDATA[
-						currentLabels[', $message['id'], '] = {';
-
-			if (!empty($message['labels']))
-			{
-				$first = true;
-				foreach ($message['labels'] as $label)
-				{
-					echo $first ? '' : ',', '
-				"', $label['id'], '": "', $label['name'], '"';
-					$first = false;
-				}
-			}
-
-			echo '
-						};
-					// ]]]]><![CDATA[></script>
-					', $message['icon'], '</td>
-				<td>', $message['time'], '</td>
-				<td>', ($context['folder'] == 'inbox' ? $message['member']['link'] : implode(', ', $message['recipients']['to'])), '</td>
-				<td align="center" width="4%"><input type="checkbox" name="pms[]" id="deletelisting', $message['id'], '" value="', $message['id'], '"', $message['is_selected'] ? ' checked="checked"' : '', ' onclick="if (document.getElementById(\'deletedisplay', $message['id'], '\')) document.getElementById(\'deletedisplay', $message['id'], '\').checked = this.checked;" class="input_check" /></td>]]></add>
-	</operation>
-	<operation>
-		<search position="replace"><![CDATA[<tr class="catbg" height="30">
-				<td colspan="3"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>
-			</tr>]]></search>
-		<add><![CDATA[<tr class="catbg" height="30">
-				<td colspan="4"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>
-			</tr>]]></add>
-	</operation>
-	<operation>
-		<search position="replace"><![CDATA[<td colspan="3" align="center">', $txt['pm_search_none_found'], '</td>
-			</tr>';
-
-		echo '
-			<tr class="catbg">
-				<td colspan="3"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></search>
-		<add><![CDATA[<td colspan="4" align="center">', $txt['pm_search_none_found'], '</td>
-			</tr>';
-
-		echo '
-			<tr class="catbg">
-				<td colspan="4"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></add>
-	</operation>
-	<!-- <operation>	line 891 -->
-		<search position="replace"><![CDATA[echo '
-		<div class="pagesection">
-			<strong>', $txt['pages'], ':</strong> ', $context['page_index'], '
-		</div>';]]></search>
-		<add><![CDATA[echo '
-		<div class="pagesection">
-			<div class="floatleft">', $txt['pages'], ': ', $context['page_index'], '</div>
-			<div class="floatright">';
-
-	if (!empty($context['personal_messages']))
-		template_folder_actions();
-		
-	echo '
-			</div>
-		</div>
-		<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
-		</form>';]]></add>
-	</operation> -->
 </file>
 
 <!-------------------------------------------------------------------------->
@@ -661,6 +359,316 @@ function template_folder_actions()
 	<operation>
 		<search position="replace"><![CDATA[<h3 class="catbg">', $txt['pm_search_results'], '</h3>]]></search>
 		<add><![CDATA[<h3 class="catbg">', $txt['pm_search_results'], ': ', $txt[($context['folder'] == 'unread' ? 'unread_items' : $context['folder'])], '</h3>]]></add>
+	</operation>
+</file>
+
+<!-------------------------------------------------------------------------->
+<!-- Search PMs from Sent Items (PersonalMessage.template.php)            -->
+<!-------------------------------------------------------------------------->
+<file name="$boarddir/Themes/core/PersonalMessage.template.php">
+	<!-- template_folder function -->
+	<operation>	<!-- line 51 -->
+		<search position="replace"><![CDATA[function template_folder()]]></search>
+		<add><![CDATA[function template_folder_javascript()]]></add>
+	</operation>
+	<operation>	<!-- line 131 -->
+		<search position="after"><![CDATA[
+	echo '
+<form action="', $scripturl, '?action=pm;sa=pmactions;', $context['display_mode'] == 2 ? 'conversation;' : '', 'f=', $context['folder'], ';start=', $context['start'], $context['current_label_id'] != -1 ? ';l=' . $context['current_label_id'] : '', '" method="post" accept-charset="', $context['character_set'], '" name="pmFolder">';]]></search>
+		<add><![CDATA[}
+
+function template_folder()
+{
+	global $context, $settings, $options, $scripturl, $modSettings, $txt;
+	
+	template_folder_javascript();
+]]></add>
+	</operation>
+
+	<!-- template_subject_list function -->
+	<operation>	<!-- line 608 -->
+		<search position="replace"><![CDATA[	{
+		if (!empty($context['currently_using_labels']) && $context['folder'] != 'sent')
+		{
+			echo '
+				<select name="pm_action" onchange="if (this.options[this.selectedIndex].value) this.form.submit();" onfocus="loadLabelChoices();">
+					<option value="">', $txt['pm_sel_label_title'], ':</option>
+					<option value="" disabled="disabled">---------------</option>';
+
+			echo '
+									<option value="" disabled="disabled">', $txt['pm_msg_label_apply'], ':</option>';
+			foreach ($context['labels'] as $label)
+				if ($label['id'] != $context['current_label_id'])
+					echo '
+					<option value="add_', $label['id'], '">&nbsp;', $label['name'], '</option>';
+			echo '
+					<option value="" disabled="disabled">', $txt['pm_msg_label_remove'], ':</option>';
+			foreach ($context['labels'] as $label)
+				echo '
+					<option value="rem_', $label['id'], '">&nbsp;', $label['name'], '</option>';
+			echo '
+				</select>
+				<noscript>
+					<input type="submit" value="', $txt['pm_apply'], '" class="button_submit" />
+				</noscript>';
+		}
+
+		echo '
+				<input type="submit" name="del_selected" value="', $txt['quickmod_delete_selected'], '" onclick="if (!confirm(\'', $txt['delete_selected_confirm'], '\')) return false;" class="button_submit" />';
+	}
+
+	echo '
+			</div>
+		</div>';
+}]]></search>
+		<add><![CDATA[		template_folder_actions();
+
+	echo '
+				</div>
+	</div>';
+}
+
+function template_folder_actions()
+{
+	global $context, $txt;
+
+	if (!empty($context['currently_using_labels']) && $context['folder'] != 'sent' && $context['folder'] != 'unread')
+	{
+		echo '
+				<select name="pm_action" onchange="if (this.options[this.selectedIndex].value) this.form.submit();" onfocus="loadLabelChoices();">
+					<option value="">', $txt['pm_sel_label_title'], ':</option>
+					<option value="" disabled="disabled">---------------</option>';
+
+		echo '
+									<option value="" disabled="disabled">', $txt['pm_msg_label_apply'], ':</option>';
+		foreach ($context['labels'] as $label)
+			if ($label['id'] != $context['current_label_id'])
+				echo '
+					<option value="add_', $label['id'], '">&nbsp;', $label['name'], '</option>';
+		echo '
+					<option value="" disabled="disabled">', $txt['pm_msg_label_remove'], ':</option>';
+		foreach ($context['labels'] as $label)
+			echo '
+					<option value="rem_', $label['id'], '">&nbsp;', $label['name'], '</option>';
+		echo '
+				</select>
+				<noscript>
+					<input type="submit" value="', $txt['pm_apply'], '" class="button_submit" />
+				</noscript>';
+	}
+
+	echo '
+				<input type="submit" name="del_selected" value="', $txt['quickmod_delete_selected'], '" onclick="if (!confirm(\'', $txt['delete_selected_confirm'], '\')) return false;" class="button_submit" />';
+}]]></add>
+	</operation>
+
+	<!-- template_search function -->
+	<operation>	<!-- line 655 -->
+		<search position="before"><![CDATA[document.getElementById("expandLabelsIcon").src = smf_images_url + (current ? "/expand.gif" : "/collapse.gif");]]></search>
+		<add><![CDATA[
+		}
+		function expandShowLabels(current)
+		{
+			document.getElementById("SearchUserField").innerHTML = current ? "' . $txt['pm_search_to_user'] . ':" : "' . $txt['pm_search_user'] . ':";
+			document.getElementById("InboxLabelsExpand").style.display = current ? "none" : "";]]></add>
+	</operation>		
+	<operation>	<!-- line 718 -->
+		<search position="replace"><![CDATA[<dt>', $txt['pm_search_user'], ':</dt>]]></search>
+		<add><![CDATA[<dt>', $txt['pm_search_what'], ':</dt>
+					<dd>
+						<select name="search_what">
+							<option value="1" onclick="expandShowLabels(0); return false;">', $txt['inbox'], '</option>
+							<option value="2" onclick="expandShowLabels(1); return false;">', $txt['sent_items'], '</option>', (isset($context['sup_folder']) ? '
+							<option value="3" onclick="expandShowLabels(1); return false;">' . $txt['unread_items'] . '</option>' : ''), '
+						</select>
+					</dd>
+					<dt id="SearchUserField">', $txt['pm_search_user'], ':</dt>]]></add>
+	</operation>
+	<operation>	<!-- line 750 -->
+		<search position="replace"><![CDATA[if ($context['currently_using_labels'])
+		{
+			echo '
+		<fieldset class="labels">
+			<span class="upperframe"><span></span></span>
+			<div class="roundframe">
+				<div class="title_bar">
+					<h4 class="titlebg">
+						<span class="ie6_header floatleft"><a href="javascript:void(0);" onclick="expandCollapseLabels(); return false;"><img src="', $settings['images_url'], '/expand.gif" id="expandLabelsIcon" alt="" /></a> <a href="javascript:void(0);" onclick="expandCollapseLabels(); return false;"><strong>', $txt['pm_search_choose_label'], '</strong></a></span>
+					</h4>
+				</div>
+				<ul id="searchLabelsExpand" class="reset" ', $context['check_all'] ? 'style="display: none;"' : '', '>';
+
+			foreach ($context['search_labels'] as $label)
+				echo '
+					<li>
+						<label for="searchlabel_', $label['id'], '"><input type="checkbox" id="searchlabel_', $label['id'], '" name="searchlabel[', $label['id'], ']" value="', $label['id'], '" ', $label['checked'] ? 'checked="checked"' : '', ' class="input_check" />
+						', $label['name'], '</label>
+					</li>';
+
+			echo '
+				</ul>
+				<p>
+					<input type="checkbox" name="all" id="check_all" value="" ', $context['check_all'] ? 'checked="checked"' : '', ' onclick="invertAll(this, this.form, \'searchlabel\');" class="input_check" /><em> <label for="check_all">', $txt['check_all'], '</label></em>
+				</p>
+			</div>
+			<span class="lowerframe"><span></span></span>
+		</fieldset>';
+		}
+
+		echo ']]></search>
+		<add><![CDATA[if ($context['currently_using_labels'])
+		{
+			echo '
+		<div id="InboxLabelsExpand"><fieldset class="labels">
+			<span class="upperframe"><span></span></span>
+			<div class="roundframe">
+				<div class="title_bar">
+					<h4 class="titlebg">
+						<span class="ie6_header floatleft"><a href="javascript:void(0);" onclick="expandCollapseLabels(); return false;"><img src="', $settings['images_url'], '/expand.gif" id="expandLabelsIcon" alt="" /></a> <a href="javascript:void(0);" onclick="expandCollapseLabels(); return false;"><strong>', $txt['pm_search_choose_label'], '</strong></a></span>
+					</h4>
+				</div>
+				<ul id="searchLabelsExpand" class="reset" ', $context['check_all'] ? 'style="display: none;"' : '', '>';
+
+			foreach ($context['search_labels'] as $label)
+				echo '
+					<li>
+						<label for="searchlabel_', $label['id'], '"><input type="checkbox" id="searchlabel_', $label['id'], '" name="searchlabel[', $label['id'], ']" value="', $label['id'], '" ', $label['checked'] ? 'checked="checked"' : '', ' class="input_check" />
+						', $label['name'], '</label>
+					</li>';
+
+			echo '
+				</ul>
+				<p>
+					<span class="floatleft"><input type="checkbox" name="all" id="check_all" value="" ', $context['check_all'] ? 'checked="checked"' : '', ' onclick="invertAll(this, this.form, \'searchlabel\');" class="input_check" /><em> <label for="check_all">', $txt['check_all'], '</label></em></span>
+				</p><br class="clear" />
+			</div>
+			<span class="lowerframe"><span></span></span>
+		</fieldset></div>';
+		}
+
+		echo ']]></add>
+	</operation>
+
+	<!-- template_search_results function -->
+	<operation>
+		<search position="replace"><![CDATA[<td colspan="3">', $txt['pm_search_results'], '</td>
+			</tr>
+			<tr class="catbg" height="30">
+				<td colspan="3"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></search>
+		<add><![CDATA[<td colspan="3">', $txt['pm_search_results'], ': ', $txt[($context['folder'] == 'unread' ? 'unread_items' : $context['folder'])], '</td>
+			</tr>
+			<tr class="catbg" height="30">
+				<td colspan="4"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[<td colspan="3">', $txt['pm_search_results'], '</td>
+			</tr>
+			<tr class="catbg">
+				<td colspan="3"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></search>
+		<add><![CDATA[<tr class="titlebg">
+				<td colspan="4">', $txt['pm_search_results'], ': ', $txt[($context['folder'] == 'unread' ? 'unread_items' : $context['folder'])], '</td>
+			</tr>
+			<tr class="catbg">
+				<td colspan="4"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>]]></add>
+	</operation>
+	<operation>	<!-- line 777 -->
+		<search position="before"><![CDATA[function template_search_results()
+{]]></search>
+		<add><![CDATA[
+	template_folder_javascript();]]></add>
+	</operation>
+	<operation>	<!-- line 789 -->
+		<search position="after"><![CDATA[// This splits broadly into two types of template... complete results first.]]></search>
+		<add><![CDATA[echo '
+		<form class="flow_hidden" action="', $scripturl, '?action=pm;sa=pmactions;', $context['display_mode'] == 2 ? 'conversation;' : '', 'f=', $context['folder'], ';start=', $context['start'], $context['current_label_id'] != -1 ? ';l=' . $context['current_label_id'] : '', '" method="post" accept-charset="', $context['character_set'], '" name="pmFolder">';
+
+	]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[<td width="30%">', $txt['date'], '</td>
+				<td width="50%">', $txt['subject'], '</td>
+				<td width="20%">', $txt['from'], '</td>]]></search>
+		<add><![CDATA[
+				<th width="30%">', $txt['date'], '</th>
+				<th width="50%">', $txt['subject'], '</th>
+				<th width="20%">', ($context['folder'] == 'inbox' ? $txt['from'] : $txt['to']), '</th>
+				<th align="center" width="4%" class="last_th"><input type="checkbox" onclick="invertAll(this, this.form);" class="input_check" /></th>]]></add>
+	</operation>
+	<operation>	<!-- line 863 -->
+		<search position="replace"><![CDATA[<td>', $message['time'], '</td>
+				<td>', $message['link'], '</td>
+				<td>', $message['member']['link'], '</td>]]></search>
+		<add><![CDATA[<td align="center">
+					<script type="text/javascript"><!-- // --><![CDATA[<]]><![CDATA[![CDATA[
+						currentLabels[', $message['id'], '] = {';
+
+			if (!empty($message['labels']))
+			{
+				$first = true;
+				foreach ($message['labels'] as $label)
+				{
+					echo $first ? '' : ',', '
+				"', $label['id'], '": "', $label['name'], '"';
+					$first = false;
+				}
+			}
+
+			echo '
+						};
+					// ]]]]><![CDATA[></script>
+					', $message['icon'], '</td>
+				<td>', $message['time'], '</td>
+				<td>', ($context['folder'] == 'inbox' ? $message['member']['link'] : implode(', ', $message['recipients']['to'])), '</td>
+				<td align="center" width="4%"><input type="checkbox" name="pms[]" id="deletelisting', $message['id'], '" value="', $message['id'], '"', $message['is_selected'] ? ' checked="checked"' : '', ' onclick="if (document.getElementById(\'deletedisplay', $message['id'], '\')) document.getElementById(\'deletedisplay', $message['id'], '\').checked = this.checked;" class="input_check" /></td>]]></add>
+	</operation>
+	<operation>	<!-- line 891 -->
+		<search position="replace"><![CDATA[
+
+		echo '
+		<table width="100%" align="center" cellpadding="3" cellspacing="0" border="0" class="tborder" style="border-width: 0 1px 1px 1px;">
+			<tr class="catbg" height="30">
+				<td colspan="3"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>
+			</tr>
+		</table>';
+	}
+	else
+	{
+		if (empty($context['personal_messages']))
+			echo '
+			<tr class="windowbg2">
+				<td colspan="3" align="center">', $txt['pm_search_none_found'], '</td>
+			</tr>';
+
+		echo '
+			<tr class="catbg">
+				<td colspan="3"><strong>', $txt['pages'], ':</strong> ', $context['page_index'], '</td>
+			</tr>
+		</table>';
+	}]]></search>
+		<add><![CDATA[
+	}
+	else
+	{
+		if (empty($context['personal_messages']))
+			echo '
+			<tr class="windowbg2">
+				<td colspan="4" align="center">', $txt['pm_search_none_found'], '</td>
+			</tr>';
+	}
+
+	echo '
+		<div class="pagesection">
+			<div class="floatleft">', $txt['pages'], ': ', $context['page_index'], '</div>
+			<div class="floatright">';
+
+	if (!empty($context['personal_messages']))
+		template_folder_actions();
+		
+	echo '
+			</div>
+		</div>
+		<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
+		</form>';]]></add>
 	</operation>
 </file>
 </modification>
