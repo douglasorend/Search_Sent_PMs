@@ -2,7 +2,7 @@
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:SearchSentPMs</id>
-<version>1.1</version>
+<version>1.2</version>
 
 <!-------------------------------------------------------------------------->
 <!-- Language file edits (Portuguese - Modifications & PersonalMessage)      -->
@@ -11,6 +11,7 @@
 	<operation>
 		<search position="end" />
 		<add><![CDATA[$txt['pm_search_what'] = 'Procurar por grupo';
+$txt['pm_search_to_user'] = 'Enviada a';
 ]]></add>
 	</operation>
 </file>
