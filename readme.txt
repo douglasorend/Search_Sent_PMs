@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]SEARCH SENT PERSONAL MESSAGES v1.3[/b][/size][/color]
+[center][color=red][size=16pt][b]SEARCH SENT PERSONAL MESSAGES v1.4[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3888]Link to Mod[/url]
 [/center]
 [hr]
@@ -19,21 +19,16 @@ This mod will [b]NOT[/b] be compatible with [url=http://custom.simplemachines.or
 o [url=http://www.simplemachines.org/community/index.php?action=profile;u=94593]FragaCampos[/url] - Portuguese_pt and Portuguese_pt-UTf8 translation
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
-[quote]
-[b][u]v1.3 - August 24th, 2014[/u][/b]
-o Moved the submit button so that it is visible without labels being created.
+The changelog has been removed and can be seen at [url=http://www.xptsp.com/board/index.php?topic=15.msg139#msg139]XPtsp.com[/url].
 
-[b][u]v1.2 - July 17th, 2014[/u][/b]
-o Added ability to search Sent Items by user/username
-o Added ability to hide the labels when selecting Sent Items to avoid confusion
+[color=blue][b][size=12pt][u]License[/u][/size][/b][/color]
+Copyright (c) 2015, Douglas Orend
+All rights reserved.
 
-[b][u]v1.1 - July 7th, 2014[/u][/b]
-o Minor language file corrections suggested by [url=http://www.simplemachines.org/community/index.php?action=profile;u=41895]margarett[/url].  No upgrade required.
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
-[b][u]v1.0 - July 5th, 2014[/u][/b]
-o Initial Release of the mod
-[/quote]
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
 
-[hr]
-[url=http://creativecommons.org/licenses/by/3.0][img]http://i.creativecommons.org/l/by/3.0/80x15.png[/img][/url]
-This work is licensed under a [url=http://creativecommons.org/licenses/by/3.0]Creative Commons Attribution 3.0 Unported License[/url]
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
