@@ -2,17 +2,16 @@
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>dougiefresh:SearchSentPMs</id>
-<version>1.0</version>
+<version>1.1</version>
 
 <!-------------------------------------------------------------------------->
 <!-- Language file edits (English - Modifications & PersonalMessage)      -->
 <!-------------------------------------------------------------------------->
 <file name="$languagedir/PersonalMessage.english_british.php" error="skip">
 	<operation>
-		<search position="replace"><![CDATA[?>]]></search>
+		<search position="end" />
 		<add><![CDATA[$txt['pm_search_what'] = 'Search group';
-
-?>]]></add>
+]]></add>
 	</operation>
 </file>
 

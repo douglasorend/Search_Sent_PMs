@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]SEARCH SENT PERSONAL MESSAGES v1.0[/b][/size][/color]
+[center][color=red][size=16pt][b]SEARCH SENT PERSONAL MESSAGES v1.1[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3888]Link to Mod[/url]
 [/center]
 [hr]
@@ -19,6 +19,9 @@ This mod will [b]NOT[/b] be compatible with [url=http://custom.simplemachines.or
 o [url=http://www.simplemachines.org/community/index.php?action=profile;u=94593]FragaCampos[/url] - Portuguese_pt and Portuguese_pt-UTf8 translation
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
+v1.1 - July 7th, 2014
+o Minor language file corrections suggested by [url=http://www.simplemachines.org/community/index.php?action=profile;u=41895]margarett[/url].  No upgrade required.
+
 v1.0 - July 5th, 2014
 o Initial Release of the mod
 
